@@ -5,6 +5,7 @@
 <title>Blog post</title>
 </head>
 <body th:object="${post}">
+	<span th:text="*{createdTime}">John Doe</span>
 	<h1>Post by <span th:text="*{author.name}">John Doe</span></h1>
 	<p th:text="*{content}">This is a post.</p>
 	<p>Likes: <span th:text="${likeCount}">0</span></p>

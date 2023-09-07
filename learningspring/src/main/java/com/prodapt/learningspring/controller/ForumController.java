@@ -139,7 +139,8 @@ public class ForumController {
     like.setLikeId(likeId);
     like.setLikedTime(new Date());
     likeCRUDRepository.save(like);
-    return String.format("redirect:/forum/post/%d", id);
+//    return String.format("redirect:/forum/post/%d", id);
+    return String.format("redirect:/list");
   }
   
   @PostMapping("/post/{id}/comment")

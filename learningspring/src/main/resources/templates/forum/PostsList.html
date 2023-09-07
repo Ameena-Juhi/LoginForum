@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Blog post</title>
+</head>
+<body>
+	<h1>Posts List</h1>
+	<div th:each="post: ${posts}">
+	<span th:text="${post.createdTime}">John Doe</span>
+	<h1>Post by <span th:text="${post.author.name}">John Doe</span></h1>
+	<p th:text="${post.content}">This is a post.</p>
+	<p>Likes: <span th:text="${likeCount}">0</span></p>
+	<form method="post" action="#" th:action="@{/forum/post/{id}/like(id = ${post.id})}">
+		<input type="hidden" th:name="likerName" th:value="${userName}">
+		<input type="submit" value="Like!">
+	</form>
+	
+	<form method="post" action="#" th:action="@{/forum/post/{id}/comment(id=${post.id})}">
+		
+		<label>Comment</label>
+		<input type="text" name="content" id="content" >
+		<input type="hidden" th:name="commenterName" th:value="${userName}">
+		<input type="submit" value="Comment!">
+	</form>
+	</div>
+	<br>
+</body>
+</html>
