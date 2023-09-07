@@ -6,11 +6,11 @@
 </head>
 <body>
 	<h1>Posts List</h1>
-	<div th:each="post: ${posts}">
+	<div th:each="post, postStat: ${posts}">
 	<span th:text="${post.createdTime}">John Doe</span>
 	<h1>Post by <span th:text="${post.author.name}">John Doe</span></h1>
 	<p th:text="${post.content}">This is a post.</p>
-	<p>Likes: <span th:text="${likeCount}">0</span></p>
+	<p>Likes: <span th:text="${likeCount[postStat.index]}">0</span></p>
 	<form method="post" action="#" th:action="@{/forum/post/{id}/like(id = ${post.id})}">
 		<input type="hidden" th:name="likerName" th:value="${userName}">
 		<input type="submit" value="Like!">
