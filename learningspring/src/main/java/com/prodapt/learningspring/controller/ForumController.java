@@ -1,6 +1,7 @@
 package com.prodapt.learningspring.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -102,6 +103,7 @@ public class ForumController {
     Post post = new Post();
     post.setAuthor(user.get());
     post.setContent(postForm.getContent());
+    post.setCreatedTime(new Date());
     postRepository.save(post);
     
     return String.format("redirect:/forum/post/%d", post.getId());
@@ -135,6 +137,7 @@ public class ForumController {
     likeId.setPost(postRepository.findById(id).get());
     LikeRecord like = new LikeRecord();
     like.setLikeId(likeId);
+    like.setLikedTime(new Date());
     likeCRUDRepository.save(like);
     return String.format("redirect:/forum/post/%d", id);
   }
@@ -149,6 +152,7 @@ public class ForumController {
 	  comment.setUserId( user.getId());
     comment.setPostId(id);
     comment.setContent(content);
+    comment.setCommentedTime(new Date());
     commentCRUDRepository.save(comment);
     return String.format("redirect:/forum/post/%d", id);
   }

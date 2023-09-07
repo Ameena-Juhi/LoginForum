@@ -1,11 +1,15 @@
 package com.prodapt.learningspring.entity;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.Data;
 
 @Entity
@@ -21,6 +25,17 @@ public class Comment{
   private String content;
   private int userId;
   private int postId;
+  
+  @Temporal(value=TemporalType.TIMESTAMP )
+  @Column(name="commentedTime")
+  private Date commentedTime;
+  
+public Date getCommentedTime() {
+	return commentedTime;
+}
+public void setCommentedTime(Date commentedTime) {
+	this.commentedTime = commentedTime;
+}
 public int getId() {
 	return id;
 }
