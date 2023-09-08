@@ -56,6 +56,9 @@ C[Like Record]--> E[Repositories]
 D[Comment]--> E[Repositories]
 G[DTOs]-->I[Single Post view]
 ```
+## ER Diagram
+![image](https://github.com/Ameena-Juhi/LoginForum/assets/141002488/0330dddf-09fa-4227-ae29-4db88033556a)
+
 
 ## Conclusion
 
