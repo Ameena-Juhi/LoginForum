@@ -39,11 +39,12 @@ The Forum Application is a platform designed for users to discuss various topics
 
 ### 3.2. Improved Post Viewing
 
-**Improvement:** All posts are now displayed on one page for a smoother user experience. The addition of pagination ensures that the page remains manageable even with a large number of posts.
-
+**Improvement:** All posts are now displayed on one page for a smoother user experience. 
 ## Future Guidelines
 - **Addition of features:** Add new features that can make the forum more accessible like tagging of users, hiding the posts,and  adding admin to the forum for ease of management.
 - **User Profiles:** Allows users to achieve reputation via the badges and encourage them to use forum application.
+- **Improved post viewing:** The addition of pagination ensures that the posts page remains manageable even with a large number of posts.
+
 
 # Forum Flow Chart
 
