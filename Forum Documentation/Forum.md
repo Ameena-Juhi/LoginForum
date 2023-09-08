@@ -45,6 +45,17 @@ The Forum Application is a platform designed for users to discuss various topics
 - **Addition of features:** Add new features that can make the forum more accessible like tagging of users, hiding the posts,and  adding admin to the forum for ease of management.
 - **User Profiles:** Allows users to achieve reputation via the badges and encourage them to use forum application.
 
+# Forum Flow Chart
+
+```mermaid
+graph LR
+A[User]--> E[Repositories]-->J[Services]-->F[Controller]-->G[DTOs]-->H[All Posts view]
+B[Post]--> E[Repositories]
+C[Like Record]--> E[Repositories]
+D[Comment]--> E[Repositories]
+G[DTOs]-->I[Single Post view]
+```
+
 ## Conclusion
 
 The Forum Application has addressed common usability issues and introduced new features to enhance the user experience. With the navigation bar and improved post viewing, users can now interact with the forum more efficiently. We remain committed to refining the application based on user feedback and continuously improving its features and functionality.
@@ -53,13 +64,3 @@ We appreciate your use of the Forum Application. If you have any questions or fe
 
 Thank you for your continued support!
 
-# Forum uml
-
-```mermaid
-graph LR
-A[User]--> E[Repositories]-->F[Controller]-->J[Services]-->G[DTOs]-->H[All Posts view]
-B[Post]--> E[Repositories]
-C[Like Record]--> E[Repositories]
-D[Comment]--> E[Repositories]
-G[DTOs]-->I[Single Post view]
-```
