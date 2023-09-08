@@ -64,3 +64,6 @@ We appreciate your use of the Forum Application. If you have any questions or fe
 
 Thank you for your continued support!
 
+## Team
+- **Ameena Juhi**
+- **Ankan**
