@@ -13,8 +13,44 @@
 		<!--<select id="userdropdown" th:field="*{userId}">
 			<option th:each="userOption : ${userList}" th:value="${userOption.id}" th:text="${userOption.name}"></option>
 		</select>-->
+		<input hidden="true" id="tod" th:value="${postCountToday}">
+		<input hidden="true" id="mon" th:value="${month}">
+		<input hidden="true" id="all" th:value="${all}">
 		<input type="hidden" th:field="*{userId}">
 		<input type="submit" value="Create!">
 	</form>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+<script>
+const xValues = ["Today", "Month","Year"];
+const y1 = parseInt(document.getElementById("tod").value);
+const y2 = parseInt(document.getElementById("mon").value);
+const y3 = parseInt(document.getElementById("all").value);
+var yValues = [y1,y2,y3];
+const barColors = ["red", "green","blue"];
+
+
+new Chart("myChart", {
+  type: "bar",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    legend: {display: false},
+    title: {
+      display: true,
+      text: "Posts Data"
+    }
+  }
+});
+</script>
+	
 </body>
 </html>

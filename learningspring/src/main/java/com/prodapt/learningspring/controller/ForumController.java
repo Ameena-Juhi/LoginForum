@@ -82,6 +82,10 @@ public class ForumController {
 	  User author = domainUserService.getByName(userDetails.getUsername()).get();
 	  postForm.setUserId(author.getId());
 	  model.addAttribute("postForm", postForm);
+	  System.out.println(postRepository.CountPostsCreatedTodayBy());
+	  model.addAttribute("postCountToday", postRepository.CountPostsCreatedTodayBy());
+	  model.addAttribute("month", postRepository.CountPostsCreatedInThisMonthBy() );
+	  model.addAttribute("all", postRepository.findCountofPosts() );
 	  return "forum/postForm";
   }
   
