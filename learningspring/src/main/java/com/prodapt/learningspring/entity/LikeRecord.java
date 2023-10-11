@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 public class LikeRecord {
   
-  @Column(unique=true)
+  @Column
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private int id;
   

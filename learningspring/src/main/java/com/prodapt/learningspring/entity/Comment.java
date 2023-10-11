@@ -29,6 +29,9 @@ public class Comment{
   @Temporal(value=TemporalType.TIMESTAMP )
   @Column(name="commentedTime")
   private Date commentedTime;
+
+  @Column
+  private String mentions;
   
 public Date getCommentedTime() {
 	return commentedTime;
