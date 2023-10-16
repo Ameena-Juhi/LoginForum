@@ -18,7 +18,6 @@ public void addStudent(Student student) {
 	PreparedStatement update = null;
 	
 	String insertstudent = "INSERT INTO StudentList(Ranks,Name,Score) VALUES (?,?,?)";
-//	String updateRank = "SELECT Id, Name, Score, ROW_NUMBER() OVER(ORDER BY Score DESC) AS Ranks FROM StudentList sl;";
 	String updatestudent = "UPDATE StudentList SET Ranks=? WHERE Id=?";
 	insert = cnx.prepareStatement(insertstudent);
 	update = cnx.prepareStatement(updatestudent);

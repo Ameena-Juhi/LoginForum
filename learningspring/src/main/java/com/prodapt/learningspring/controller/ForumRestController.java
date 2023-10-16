@@ -23,15 +23,11 @@ import com.prodapt.learningspring.entity.Comment;
 import com.prodapt.learningspring.entity.LikeId;
 import com.prodapt.learningspring.entity.LikeRecord;
 import com.prodapt.learningspring.entity.Post;
-// import com.prodapt.learningspring.entity.User;
 import com.prodapt.learningspring.repository.CommentCRUDRepository;
 import com.prodapt.learningspring.repository.LikeCRUDRepository;
 import com.prodapt.learningspring.repository.LikeCountRepository;
 import com.prodapt.learningspring.repository.PostRepository;
-// import com.prodapt.learningspring.repository.UserRepository;
 import com.prodapt.learningspring.repository.UserRepository;
-
-
 
 @RestController
 @RequestMapping("/newforum")
@@ -39,87 +35,96 @@ import com.prodapt.learningspring.repository.UserRepository;
 public class ForumRestController {
 
 	@Autowired
-	  private PostRepository postRepository;
+	private PostRepository postRepository;
 
-	  @Autowired
-	  private UserRepository userRepository;
+	@Autowired
+	private UserRepository userRepository;
 
-	  @Autowired
-	  private LikeCountRepository likeCountRepository;
+	@Autowired
+	private LikeCountRepository likeCountRepository;
 
-	  @Autowired
-	  private LikeCRUDRepository likeCRUDRepository;
+	@Autowired
+	private LikeCRUDRepository likeCRUDRepository;
 
-	  @Autowired
-	  private CommentCRUDRepository commentCRUDRepository;
-	
+	@Autowired
+	private CommentCRUDRepository commentCRUDRepository;
+
 	@GetMapping("/post/{id}")
 	@ResponseBody
-	  public ResponseEntity<PostDTO> postDetail(@PathVariable int id) throws ResourceNotFoundException {
+	public ResponseEntity<PostDTO> postDetail(@PathVariable int id) throws ResourceNotFoundException {
 
-	    Optional<Post> post = postRepository.findById(id);
-	    if (post.isEmpty()) {
-	      throw new ResourceNotFoundException("No post with the requested ID");
-	    }
-	    PostDTO postDTO = new PostDTO();
+		Optional<Post> post = postRepository.findById(id);
+		if (post.isEmpty()) {
+			throw new ResourceNotFoundException("No post with the requested ID");
+		}
+		PostDTO postDTO = new PostDTO();
 		postDTO.setPostId(id);
 		postDTO.setContent(post.get().getContent());
 		postDTO.setCreatedTime(post.get().getCreatedTime());
 		postDTO.setLikesCount(likeCountRepository.countByPostId(id));
-	    return ResponseEntity.ok(postDTO);
-	  }
-
-
+		return ResponseEntity.ok(postDTO);
+	}
 
 	@GetMapping("/comment/{id}")
 	@ResponseBody
 	public ResponseEntity<List<Comment>> commentsdetail(@PathVariable int id) throws ResourceNotFoundException {
-		List<Comment>  comments = commentCRUDRepository.findByPostId(id);
-		if(comments.isEmpty()){
+		List<Comment> comments = commentCRUDRepository.findByPostId(id);
+		if (comments.isEmpty()) {
 			throw new ResourceNotFoundException("No comments with the requested ID");
 		}
-		for (Comment comment: comments){
+		for (Comment comment : comments) {
 			comment.getPostId();
 			comment.getContent();
 			comment.getUserId();
 			comment.getCommentedTime();
 		}
-		
+
 		return ResponseEntity.ok(comments);
 
 	}
 
-	 @PostMapping("addComment/{id}")
-	 @ResponseBody
- 	public List<Comment> postComment(@PathVariable int id,@RequestBody Comment comment) {
-	//   User user = userRepository.findByName(commenterName).get();
-		List<Comment>  comments = commentCRUDRepository.findByPostId(id);
+	@PostMapping("addComment/{id}")
+	@ResponseBody
+	public List<Comment> postComment(@PathVariable int id, @RequestBody Comment comment) {
+		// User user = userRepository.findByName(commenterName).get();
+		List<Comment> comments = commentCRUDRepository.findByPostId(id);
 		Pattern pattern = Pattern.compile("@(\\w+)");
 		Matcher matcher = pattern.matcher(comment.getContent());
 
-        // Extract and store tags
-        while (matcher.find()) {
-            comment.setMentions(matcher.group(1));
-        }
-		
-	  	comment.setUserId( 2);
+		// Extract and store tags
+		while (matcher.find()) {
+			comment.setMentions(matcher.group(1));
+		}
+
+		comment.setUserId(2);
 		comment.setCommentedTime(new Date());
-   		commentCRUDRepository.save(comment);
-   		return comments;
- }
+		commentCRUDRepository.save(comment);
+		return comments;
+	}
 
- 	@PostMapping("/like/{id}")
+	@PostMapping("/like/{id}")
 	@ResponseBody
-  	public Post postLike(@PathVariable int id) {
-    LikeId likeId = new LikeId();
-	likeId.setUser(userRepository.findById(2).get());
-	var post = postRepository.findById(id).get();
-    likeId.setPost(post);
-    LikeRecord like = new LikeRecord();
-    like.setLikeId(likeId);
-    like.setLikedTime(new Date());
-    likeCRUDRepository.save(like);
-	return post;
+	public Post postLike(@PathVariable int id) {
+		LikeId likeId = new LikeId();
+		likeId.setUser(userRepository.findById(2).get());
+		var post = postRepository.findById(id).get();
+		likeId.setPost(post);
+		LikeRecord like = new LikeRecord();
+		like.setLikeId(likeId);
+		like.setLikedTime(new Date());
+		likeCRUDRepository.save(like);
+		return post;
 
-  }
+	}
+
+	@Autowired
+public void setPostRepository(PostRepository postRepository) {
+    this.postRepository = postRepository;
+}
+
+@Autowired
+public void setLikeCountRepository(LikeCountRepository likeCountRepository) {
+    this.likeCountRepository = likeCountRepository;
+}
+
 }

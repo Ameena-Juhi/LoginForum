@@ -17,22 +17,19 @@ import com.prodapt.learningspring.controller.exception.ResourceNotFoundException
 import com.prodapt.learningspring.entity.User;
 import com.prodapt.learningspring.service.UserService;
 
-
-
-
 @Controller
 @RequestMapping("/loginpage")
 public class LoginController {
 
     private UserService userService;
     private LoggedInUser loggedInUser;
-    
+
     public LoginController(@Autowired UserService userService,
-    @Autowired LoggedInUser loggedInUser) {
+            @Autowired LoggedInUser loggedInUser) {
         this.userService = userService;
         this.loggedInUser = loggedInUser;
     }
-    
+
     @GetMapping
     public String getLoginForm(Model model) {
         if (!model.containsAttribute("user")) {
@@ -42,7 +39,8 @@ public class LoginController {
     }
 
     @PostMapping
-    public String login(@ModelAttribute("user") User user, BindingResult bindingResult, RedirectAttributes attr) throws ResourceNotFoundException {
+    public String login(@ModelAttribute("user") User user, BindingResult bindingResult, RedirectAttributes attr)
+            throws ResourceNotFoundException {
         if (bindingResult.hasErrors()) {
             attr.addFlashAttribute("org.springframework.validation.BindingResult.user", bindingResult);
             attr.addFlashAttribute("user", user);
@@ -59,4 +57,3 @@ public class LoginController {
     }
 
 }
-
